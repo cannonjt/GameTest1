@@ -24,4 +24,21 @@ public class GameInstance {
 		return disPlayer;
 	}
 
+	@Override
+	public String toString() {
+		return "GameInstance [gameID=" + gameID + ", disPlayer=" + disPlayer.toString()
+				+ "]";
+	}
+
+	public Player getPlayer() {
+		return disPlayer;
+	}
+
+	public void setPlayer(Player disPlayer) {
+		this.disPlayer = disPlayer;
+	}
+	
+	
+	
+
 }

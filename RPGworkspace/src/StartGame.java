@@ -5,9 +5,17 @@ import java.util.*;
 public class StartGame {
 	
 	private static Scanner keyboard = new Scanner(System.in);
-
+	private static GameInstance currentGame = null;
+	
+	
 	public static void main(String[] args) {
-		GameInstance currentGame = welcome();
+		currentGame = welcome();
+		System.out.println(currentGame.toString());
+		
+		for(int i = 0; i < 15; i++){
+			currentGame.getPlayer().giveExperience(80);
+			System.out.println(currentGame.getPlayer().getExperience());
+		}
 	}
 	
 	public static String makeSelection(){
@@ -34,6 +42,8 @@ public class StartGame {
 		return "System Failure! Somebody set us up the bomb";
 	}
 	
+	//Welcome screen, asks player if they want to start a new game or load up an old game, 
+	//returns a gameInstance created based on what the user selects
 	public static GameInstance welcome(){
 		System.out.println("Welcome to sample RPG! Type in your number of your selection and press enter to submit.");
 		System.out.println("1. Start a new game");
@@ -43,8 +53,10 @@ public class StartGame {
 		
 		if(sel.equals("1") || sel.equals("newgame")){
 			System.out.println("New game selected");
-			GameInstance currentGame = new GameInstance();
+			
+			currentGame = newGame();
 			return currentGame;
+			
 			
 		}
 		
@@ -55,6 +67,15 @@ public class StartGame {
 		}
 		return null;
 
+	}
+	
+	//Method to ask the player what they want as game options (eg. name) and create new GameInstance
+	public static GameInstance newGame(){
+		GameInstance newGameInst = new GameInstance();
+		System.out.println("Please enter a character name (and then press enter): ");
+		newGameInst.createPlayer(keyboard.nextLine());
+		
+		return newGameInst;
 	}
 
 }
